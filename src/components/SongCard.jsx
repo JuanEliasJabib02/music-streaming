@@ -6,6 +6,23 @@ import PlayPause from "./PlayPause"
 import {playPause, setActiveSong} from "../redux/features/playerSlice"
 const SongCard = ({ song }) => {
 
+  const artistsSong = song.artists?.map(artist => {
+    const artistName = artist.name
+
+    return artistName
+  })
+
+  console.log(artistsSong)
+  const songData = {
+    img: song.album.cover[0].url,
+    name: song.name,
+    artists: artistsSong
+  }
+
+
+ 
+
+  console.log(songData)
   
   const activeSong = {
     title:"perro"
@@ -20,6 +37,31 @@ const SongCard = ({ song }) => {
           <PlayPause
           />
         </div>
+        <img src={songData.img} alt="song_img" />
+      </div>
+      <div className='mt-4 flex flex-col'>
+        <p>
+          <Link>
+            {songData.name}
+          </Link>
+        </p>
+        <p>
+          <Link>
+            <p >
+              {
+                songData.artists[0]
+              }
+              
+                {
+                  
+                songData.artists[1]
+                  ? <span> & {songData.artists[1]}</span>
+                  : ""
+                }
+              
+            </p>
+          </Link>
+        </p>
       </div>
     </div>
   )
