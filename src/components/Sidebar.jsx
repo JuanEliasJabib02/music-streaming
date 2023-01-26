@@ -7,13 +7,13 @@ import {links} from "../assets/constants"
 import React from 'react'
 import { HiOutlineMenu } from "react-icons/hi";
 
-console.log(links)
 
 const NavLinks = () => (
   <div className="mt-10">
     {
-      links.map(item => (
+      links?.map(item => (
         <NavLink
+          key={item.name}
           className=" flex flex-row justify-start items-center my-8 text-sm font-medium"
           onClick={() => handleClick && handleClick()}>
           <item.icon className="w-6 h-6 mr-2 color-red color-red" />
