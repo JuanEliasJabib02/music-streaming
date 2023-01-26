@@ -40,14 +40,15 @@ const SongCard = ({ song }) => {
         <img src={songData.img} alt="song_img" />
       </div>
       <div className='mt-4 flex flex-col'>
-        <p>
-          <Link>
+        <p className='font-semibold text-lg text-black truncate'>
+          <Link to={`songs/${song.id}`}>
             {songData.name}
           </Link>
         </p>
         <p>
+          {/* Put link to the artist dynamic later */}
           <Link>
-            <p >
+            <p className='text-sm truncate text-black-500 mt-1'>
               {
                 songData.artists[0]
               }
