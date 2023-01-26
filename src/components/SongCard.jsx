@@ -1,5 +1,11 @@
-const SongCard = () => (
-  <div>SongCard</div>
-);
+import React from 'react'
 
-export default SongCard;
+const SongCard = ({ song }) => {
+  
+  console.log(song)
+  return (
+    <div>SongCard</div>
+  )
+}
+
+export default SongCard

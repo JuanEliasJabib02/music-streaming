@@ -2,10 +2,26 @@ import React from 'react';
 import { Loader, Error, SongCard } from '../components';
 import { genres } from "../assets/constants";
 
+import {useGetTopChartsQuery} from "../redux/services/SpootifyScrapping.js"
 const Discover = () => {
 
+  const { data, isFetching, error } = useGetTopChartsQuery();
+
+  if (isFetching) return < Loader title="loadingsongs" />
+  
+  if (error) return < Error />;
+  
+  const splitData = data?.tracks
+
+  const tracks = []
+
+  for (let i = 0;  i <= 14; i++){
+    tracks.push(splitData[i])
+  }
+
+
+
   const genreTitle ="Trap"
-  console.log('perro');
   return (
     <div className='flex flex-col'>
       <div className='w-full flex justify-between items-center
@@ -25,10 +41,11 @@ const Discover = () => {
       </div>
       <div className='flex flex-wrap sm:justify-start justify-center gap-8'>
         {
-          [1, 2, 3, 4, 5, 6, 7, 8].map((song,i) => (
+          tracks?.map((song,i) => (
             < SongCard
-              key={song}
+              
               song={song}
+              key={song.id}
               i={i}
             />
           ))
