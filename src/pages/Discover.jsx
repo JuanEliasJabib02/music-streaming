@@ -1,9 +1,17 @@
 import React from 'react';
 import { Loader, Error, SongCard } from '../components';
 import { genres } from "../assets/constants";
-
 import {useGetTopChartsQuery} from "../redux/services/SpootifyScrapping.js"
+import { useDispatch, useSelector } from 'react-redux';
+
+
 const Discover = () => {
+
+  const dispatch = useDispatch()
+
+  const { activeSong, isPlaying } = useSelector(state => state.player)
+  
+
 
   const { data, isFetching, error } = useGetTopChartsQuery();
 
@@ -43,10 +51,12 @@ const Discover = () => {
         {
           tracks?.map((song,i) => (
             < SongCard
-              
+              activeSong={activeSong}
+              isPlaying={isPlaying}
               song={song}
               key={song.id}
               i={i}
+              tracks={tracks}
             />
           ))
         }
