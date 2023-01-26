@@ -49,7 +49,7 @@ const SongCard = ({ song, activeSong, isPlaying, i, tracks }) => {
         <img src={songData.img} alt="song_img" />
       </div>
       <div className='mt-4 flex flex-col'>
-        <p className='font-semibold text-lg text-black truncate'>
+        <p className='font-semibold text-lg text-white truncate'>
           <Link to={`songs/${song.id}`}>
             {songData.name}
           </Link>
@@ -57,7 +57,7 @@ const SongCard = ({ song, activeSong, isPlaying, i, tracks }) => {
         <p>
           {/* Put link to the artist dynamic later */}
           <Link>
-            <p className='text-sm truncate text-black-500 mt-1'>
+            <p className='text-sm truncate text-gray-300 mt-1'>
               {
                 songData.artists[0]
               }
