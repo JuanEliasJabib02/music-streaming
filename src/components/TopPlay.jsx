@@ -10,7 +10,7 @@ import {useGetTopArtistQuery, useGetTopChartsQuery} from "../redux/services/Spoo
 import { setActiveSong , playPause} from '../redux/features/playerSlice';
 
 
-const TopChartCard = ({ song, i}) => {
+const TopChartCard = ({ song, i, setSongDataSend}) => {
 
   const artistsSong = song.artists?.map(artist => {
     const artistName = artist?.name
@@ -25,6 +25,9 @@ const TopChartCard = ({ song, i}) => {
     artists: artistsSong
   }
 
+  useEffect(() => {
+    setSongDataSend(songData)
+  },[])
 
   
   return (
@@ -65,7 +68,7 @@ const TopChartCard = ({ song, i}) => {
 
 
 
-const TopPlay = () => {
+const TopPlay = ({setSongDataSend}) => {
 
   const dispatch = useDispatch();
   const divRef = useRef(null)
@@ -97,17 +100,6 @@ const TopPlay = () => {
   })
 
   
-  const handlePauseClick = () => {
-    dispatch(PlayPause(false))
-  }
-
-  
-  const handlePlayClick = ( ) => {
-    dispatch(setActiveSong({ song, tracks, i }))
-    dispatch(playPause(true))
-  }
-
-  
 
   return (
     <div ref={divRef} className='xl:ml-6 ml-0 xl:mb-6 flex-1
@@ -126,6 +118,7 @@ const TopPlay = () => {
               song={song}
               i={i}
               key={song.id}
+              setSongDataSend={setSongDataSend}
             />
           ))   
         }

@@ -15,12 +15,16 @@ export const SpootifyAPI = createApi({
   }),
   endpoints: (builder) => ({
     getTopCharts: builder.query({ query: () => "/chart/tracks/top" }),
-    getTopArtist: builder.query({ query: () => "/chart/artists/top" })
+    getTopArtist: builder.query({ query: () => "/chart/artists/top" }),
+    getSongLyric: builder.query({ query: ({ songid }) => `/track/lyrics?trackId=${songid}` },),
+
+
   })
 })
 
 
 export const {
   useGetTopChartsQuery,
-  useGetTopArtistQuery
+  useGetTopArtistQuery,
+  useGetSongLyricQuery
 } = SpootifyAPI
