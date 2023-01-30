@@ -7,16 +7,58 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import PlayPause from './PlayPause';
 import {useGetTopArtistQuery, useGetTopChartsQuery} from "../redux/services/SpootifyScrapping"
-import { setActiveSong } from '../redux/features/playerSlice';
+import { setActiveSong , playPause} from '../redux/features/playerSlice';
 
 
-const TopChartCard = ({ song, i }) => {
-  
+const TopChartCard = ({ song, i}) => {
+
+  const artistsSong = song.artists?.map(artist => {
+    const artistName = artist?.name
+
+    return artistName
+  })
+
+  const songData = {
+    id: song?.id,
+    img: song?.album.cover[0].url,
+    name: song?.name,
+    artists: artistsSong
+  }
+
+
   
   return (
-    <div className='w-full flex flex-row items-center hover:bg-[#4c426e]
+    <div className=' w-full flex flex-row items-center hover:bg-[#4c426e]
     py-2 p-4 rounded cursor-pointer mb-2 '>
-      {song.name}
+      <h3 className='font-bold text-base text-white mr-3'>{i + 1}.</h3>
+      <div className='flex-1 flex flex-row justify-between items-center'>
+        <img
+          className='w-12 h-13 rounded-lg'
+          src={songData.img} alt="cover-art"
+        />
+        <div className='flex-1 flex flex-col justify-center mx-3'>
+          <Link to={`/songs/${songData.id}`}>
+            <p className='text-l font-bold text-white'>
+              {songData.name}
+            </p>
+          </Link>
+          <Link to={`/artists/${songData.artists[0]}`}>
+            <p className='text-xs text-gray-300 mt-1'>
+            {
+                songData.artists[0]
+              }
+              
+                {
+                  
+                songData.artists[1]
+                  ? <span> & {songData.artists[1]}</span>
+                  : ""
+                }
+              
+            </p>
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }
@@ -26,7 +68,6 @@ const TopChartCard = ({ song, i }) => {
 const TopPlay = () => {
 
   const dispatch = useDispatch();
-  const { activeSong, isPlaying } = useSelector(state => state.player)
   const divRef = useRef(null)
     
   const { data, isFetching } = useGetTopChartsQuery();
@@ -34,15 +75,20 @@ const TopPlay = () => {
   
   const splitData = data?.tracks
   const topPlays = []
+
+
   
   if (splitData) {
     for (let i = 0;  i <= 4; i++){
       topPlays.push(splitData[i])
     }
+
+
   } 
 
   const topArtistsData = useGetTopArtistQuery()
   const topArtist = topArtistsData.data?.artists.slice(0, 5)
+
   console.log(topArtist)
 
 
@@ -55,16 +101,19 @@ const TopPlay = () => {
     dispatch(PlayPause(false))
   }
 
-  const handlePlayClick = () => {
+  
+  const handlePlayClick = ( ) => {
     dispatch(setActiveSong({ song, tracks, i }))
-    dispatch(PlayPause(true))
+    dispatch(playPause(true))
   }
+
+  
 
   return (
     <div ref={divRef} className='xl:ml-6 ml-0 xl:mb-6 flex-1
-    xl:max-w-[500px] max-w-full flex-col'>
-      <div className='w-full flex flex-col'>
-        <div className='flex flex-row justify-between items-center'>
+    xl:max-w-[400px] max-w-full flex-col'>
+      <div className='w-full flex flex-col '>
+        <div  className='flex flex-row justify-between items-center'>
           <h2 className='text-white font-bold text-2xl'>Top Charts</h2>
           <Link to="/top-charts">
             <p className='text-gray-300 text-base cursor-pointer'>see more</p>
@@ -81,16 +130,16 @@ const TopPlay = () => {
           ))   
         }
         </div>
-        <div className='w-full flex flex-col mt-8'>
-          <div className='flex flex-row justify-between items-center'>
-            <h2 className='text-white font-bold text-2xl'>Top Artists</h2>
+        <div className='w-full flex flex-col mt-3'>
+          <div className='flex flex-row justify-between items-center '>
+            <h2 className='text-white font-bold text-2xl '>Top Artists</h2>
             <Link to="/top-charts">
               <p className='text-gray-300 text-base cursor-pointer'>see more</p>
             </Link>
           </div>
         </div>
 
-        < Swiper
+          < Swiper
           slidesPerView="auto"
           spaceBetween={15}
           freeMode
@@ -103,12 +152,12 @@ const TopPlay = () => {
             topArtist?.map((artist, i) => (
               < SwiperSlide
                 key={artist?.id}
-                style={{ width: "25%", height: "auto" }}
+                style={{ width: "17%", height: "auto" }}
                 className='shadow-lg rounded-full animate-slideright '
                                
               >
                 {/* Put link to each id */}
-                <Link to={`/artist/`}>
+                <Link to={`/artists/${artist.id}`}>
                   <img
                     src={artist?.visuals.avatar[0].url}
                     alt="artist"
