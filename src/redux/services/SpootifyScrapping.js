@@ -7,7 +7,7 @@ export const SpootifyAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://spotify-scraper.p.rapidapi.com/v1",
     prepareHeaders: (headers) => {
-      headers.set("X-RAPIDAPI-Key", "e551743d2dmshdfa4b326d4ec95cp10667ejsn489eed3c6f23"),
+      headers.set("X-RAPIDAPI-Key", "f8d010d7bamsh448713cb42b04d3p1d0a08jsn65d20e8ca833"),
         headers.set("X-RapidAPI-Host", "spotify-scraper.p.rapidapi.com")
 
       return headers

@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from "react-router-dom"
-import { useSelector, useDispatch } from 'react-redux'
+import {  useDispatch } from 'react-redux'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/free-mode';
-import PlayPause from './PlayPause';
 import { useGetTopChartsQuery} from "../redux/services/SpootifyScrapping"
 import axios from "axios"
 
@@ -44,7 +43,7 @@ const TopChartCard = ({ song, i}) => {
               {songData.name}
             </p>
           </Link>
-          <Link to={`/artists/${songData.artists[0]}`}>
+          <Link to={`/artists/${songData.artists[0]}`} state={{artist:songData?.artists[0]}}>
             <p className='text-xs text-gray-300 mt-1'>
             {
                 songData.artists[0]
@@ -96,7 +95,7 @@ const TopPlay = ({setSongDataSend}) => {
     setTimeout(() => {
       const config = {
         headers:{
-          "X-RapidAPI-Key": "e551743d2dmshdfa4b326d4ec95cp10667ejsn489eed3c6f23",
+          "X-RapidAPI-Key": "f8d010d7bamsh448713cb42b04d3p1d0a08jsn65d20e8ca833",
           "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
         }
       }
@@ -166,11 +165,12 @@ const TopPlay = ({setSongDataSend}) => {
                                
               >
                 {/* Put link to each id */}
-                <Link to={`/artists/${artist.id}`} >
+                <Link to={`/artists/${artist.id}`} state={{ artist:artist}} >
                   <img
                     src={artist?.visuals.avatar[0].url}
                     alt="artist"
                     className='w-full h-full object-cover rounded-full'
+                    
                   />
                 </Link>
               </SwiperSlide>
