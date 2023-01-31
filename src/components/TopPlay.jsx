@@ -6,17 +6,18 @@ import { FreeMode } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import PlayPause from './PlayPause';
-import {useGetTopArtistQuery, useGetTopChartsQuery} from "../redux/services/SpootifyScrapping"
-import { setActiveSong , playPause} from '../redux/features/playerSlice';
+import { useGetTopChartsQuery} from "../redux/services/SpootifyScrapping"
 import axios from "axios"
 
-const TopChartCard = ({ song, i, setSongDataSend}) => {
+const TopChartCard = ({ song, i}) => {
 
   const artistsSong = song.artists?.map(artist => {
     const artistName = artist?.name
 
     return artistName
   })
+
+
 
   const songData = {
     id: song?.id,
@@ -25,13 +26,11 @@ const TopChartCard = ({ song, i, setSongDataSend}) => {
     artists: artistsSong
   }
 
-  useEffect(() => {
-    setSongDataSend(songData)
-  },[])
+
 
   
   return (
-    <div className=' w-full flex flex-row items-center hover:bg-[#4c426e]
+     <div  className=' w-full flex flex-row items-center hover:bg-[#4c426e]
     py-2 p-4 rounded cursor-pointer mb-2 '>
       <h3 className='font-bold text-base text-white mr-3'>{i + 1}.</h3>
       <div className='flex-1 flex flex-row justify-between items-center'>
@@ -73,7 +72,7 @@ const TopPlay = ({setSongDataSend}) => {
   const dispatch = useDispatch();
   const divRef = useRef(null)
     
-  const { data, isFetching } = useGetTopChartsQuery();
+  const { data } = useGetTopChartsQuery();
 
   
 
@@ -97,7 +96,7 @@ const TopPlay = ({setSongDataSend}) => {
     setTimeout(() => {
       const config = {
         headers:{
-          "X-RapidAPI-Key": "cc62e7ecc1mshc1e4809f5581591p1029c9jsn7b9bb78166de",
+          "X-RapidAPI-Key": "e551743d2dmshdfa4b326d4ec95cp10667ejsn489eed3c6f23",
           "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
         }
       }
@@ -105,12 +104,11 @@ const TopPlay = ({setSongDataSend}) => {
       axios.get(URL, config)
         .then(res => setTopArtistsData(res.data)) 
         .catch(err => console.log(err))
-    }, 1000);
+    }, 2000);
   },[])
 
   const topArtist = topArtistsData?.artists.slice(0, 5)
 
-  console.log(topArtist)
 
 
   useEffect(() => {
@@ -136,7 +134,6 @@ const TopPlay = ({setSongDataSend}) => {
               song={song}
               i={i}
               key={song.id}
-              setSongDataSend={setSongDataSend}
             />
           ))   
         }
@@ -157,7 +154,7 @@ const TopPlay = ({setSongDataSend}) => {
           centeredSlides
           centeredSlidesBounds
           modules={[FreeMode]}
-          className='"mt-4'
+          className='"mt-4 mb-4'
         >
           {
             topArtist?.map((artist, i) => (

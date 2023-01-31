@@ -9,7 +9,7 @@ const App = () => {
   
   const { activeSong } = useSelector((state) => state.player);
 
-  const [songDataSend, setSongDataSend] = useState()
+ 
 
   return (
     <div className="relative flex">
@@ -25,12 +25,12 @@ const App = () => {
               <Route path="/top-charts" element={<TopCharts  />} />
               <Route path="/around-you" element={<AroundYou />} />
               <Route path="/artists/:id" element={<ArtistDetails />} />
-              <Route path="/songs/:songid" element={<SongDetails songDataSend={songDataSend} />} />
+              <Route path="/songs/:songid" element={<SongDetails />} />
               <Route path="/search/:searchTerm" element={<Search />} />
             </Routes>
           </div>
           <div className="xl:sticky relative top-0 h-fit">
-            <TopPlay setSongDataSend={setSongDataSend} />
+            <TopPlay  />
           </div>
         </div>
       </div>
