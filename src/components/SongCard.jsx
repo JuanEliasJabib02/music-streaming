@@ -54,7 +54,7 @@ const SongCard = ({ song, activeSong, isPlaying, i, tracks }) => {
             {songData.name}
           </Link>
         </p>
-        <p>
+        <div>
           {/* Put link to the artist dynamic later */}
           <Link>
             <p className='text-sm truncate text-gray-300 mt-1'>
@@ -71,7 +71,7 @@ const SongCard = ({ song, activeSong, isPlaying, i, tracks }) => {
               
             </p>
           </Link>
-        </p>
+        </div>
       </div>
     </div>
   )

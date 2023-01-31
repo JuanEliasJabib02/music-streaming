@@ -14,11 +14,7 @@ const SongDetails = ({songDataSend}) => {
   const dispatch = useDispatch();
 
   const [songLyrics, setSongLyrics] = useState()
-
-  const [songMetaData, setSongMetaData] = useState()
-
-  console.log(songDataSend)
-
+  
   useEffect(() => {
     const config = {
       headers:{
@@ -33,7 +29,7 @@ const SongDetails = ({songDataSend}) => {
   }, [songid])
 
 
-  console.log(songLyrics)
+  console.log(songDataSend)
 
   return (
     <div className='flex flex-col'>
@@ -44,7 +40,7 @@ const SongDetails = ({songDataSend}) => {
         </h2>
 
         <div className='mt-5'>
-
+  
         </div>
       </div>
 

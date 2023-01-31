@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,7 +8,7 @@ import 'swiper/css/free-mode';
 import PlayPause from './PlayPause';
 import {useGetTopArtistQuery, useGetTopChartsQuery} from "../redux/services/SpootifyScrapping"
 import { setActiveSong , playPause} from '../redux/features/playerSlice';
-
+import axios from "axios"
 
 const TopChartCard = ({ song, i, setSongDataSend}) => {
 
@@ -76,6 +76,7 @@ const TopPlay = ({setSongDataSend}) => {
   const { data, isFetching } = useGetTopChartsQuery();
 
   
+
   const splitData = data?.tracks
   const topPlays = []
 
@@ -88,9 +89,26 @@ const TopPlay = ({setSongDataSend}) => {
 
 
   } 
+  
+  const [topArtistsData, setTopArtistsData] = useState()
 
-  const topArtistsData = useGetTopArtistQuery()
-  const topArtist = topArtistsData.data?.artists.slice(0, 5)
+  
+  useEffect(() => {
+    setTimeout(() => {
+      const config = {
+        headers:{
+          "X-RapidAPI-Key": "cc62e7ecc1mshc1e4809f5581591p1029c9jsn7b9bb78166de",
+          "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
+        }
+      }
+      const URL = `https://spotify-scraper.p.rapidapi.com/v1/chart/artists/top`
+      axios.get(URL, config)
+        .then(res => setTopArtistsData(res.data)) 
+        .catch(err => console.log(err))
+    }, 1000);
+  },[])
+
+  const topArtist = topArtistsData?.artists.slice(0, 5)
 
   console.log(topArtist)
 
