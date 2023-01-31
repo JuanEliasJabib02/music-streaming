@@ -3,13 +3,24 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const DetailsHeader = () => {
+const DetailsHeader = ({song}) => {
+
+  const artistsSong = song.artists?.map(artist => {
+    const artistName = artist?.name
+
+    return artistName
+  })
+
+
 
   const songData = {
-    value: "value",
-    value2:"value"
+    img: song?.album.cover[0].url,
+    name: song?.name,
+    artists: artistsSong
   }
-  
+
+
+
   return (
     <div className='relative w-full flex flex-col'>
       <div className='w-full bg-grandient-to-1 sm:4-48 h-28 bg-black ' />

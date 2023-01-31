@@ -1,8 +1,7 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import {  useLocation, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { DetailsHeader } from '../components'
-
 
 
 import axios from 'axios'
@@ -14,9 +13,11 @@ const SongDetails = () => {
   const { songid } = useParams();
   const dispatch = useDispatch();
 
+  const location = useLocation()
 
+  const { song } = location.state
   const [songLyrics, setSongLyrics] = useState()
-  
+
   useEffect(() => {
     const config = {
       headers:{
@@ -34,12 +35,12 @@ const SongDetails = () => {
   
 
 
-  console.log(songLyrics)
+  
 
   return (
     <div className='flex flex-col'>
-      {/* < DetailsHeader songid={songid}/> */}
-
+      < DetailsHeader song={song} /> 
+  
       <div className='mb-10 mt-5'>
         <h2 className='text-white text-3xl font-bold '>
           Lyrics:

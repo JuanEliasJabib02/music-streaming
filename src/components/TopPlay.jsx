@@ -39,7 +39,7 @@ const TopChartCard = ({ song, i}) => {
           src={songData.img} alt="cover-art"
         />
         <div className='flex-1 flex flex-col justify-center mx-3'>
-          <Link to={`/songs/${songData.id}`}>
+          <Link to={`/songs/${songData.id}`} state={{song}}>
             <p className='text-l font-bold text-white'>
               {songData.name}
             </p>
@@ -162,10 +162,11 @@ const TopPlay = ({setSongDataSend}) => {
                 key={artist?.id}
                 style={{ width: "17%", height: "auto" }}
                 className='shadow-lg rounded-full animate-slideright '
+               
                                
               >
                 {/* Put link to each id */}
-                <Link to={`/artists/${artist.id}`}>
+                <Link to={`/artists/${artist.id}`} >
                   <img
                     src={artist?.visuals.avatar[0].url}
                     alt="artist"
