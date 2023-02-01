@@ -1,6 +1,5 @@
 import React from 'react'
 import {  useLocation, useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
 import { DetailsHeader } from '../components'
 
 
@@ -11,7 +10,6 @@ import { useState } from 'react'
 const SongDetails = () => {
 
   const { songid } = useParams();
-  const dispatch = useDispatch();
 
   const location = useLocation()
 
@@ -21,7 +19,7 @@ const SongDetails = () => {
   useEffect(() => {
     const config = {
       headers:{
-        "X-RapidAPI-Key": "f8d010d7bamsh448713cb42b04d3p1d0a08jsn65d20e8ca833",
+        "X-RapidAPI-Key": "66978d38aamsh2ad17523d253acep1e954bjsnab8d64fc75f1",
         "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
       }
     }

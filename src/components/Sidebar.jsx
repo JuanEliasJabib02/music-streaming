@@ -14,6 +14,7 @@ const NavLinks = () => (
       links?.map(item => (
         <NavLink
           key={item.name}
+          to="/"
           className=" flex flex-row justify-start items-center my-8 text-sm font-medium"
           onClick={() => handleClick && handleClick()}>
           <item.icon className="w-6 h-6 mr-2 color-red color-red" />

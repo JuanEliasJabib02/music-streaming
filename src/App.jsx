@@ -30,6 +30,9 @@ const App = () => {
             <TopPlay  />
           </div>
         </div>
+        <div className='h-20'>
+        class
+      </div>
       </div>
 
       {activeSong?.name && (
@@ -37,6 +40,7 @@ const App = () => {
           <MusicPlayer />
         </div>
       )}
+
     </div>
   );
 };

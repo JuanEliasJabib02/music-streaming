@@ -95,7 +95,7 @@ const TopPlay = ({setSongDataSend}) => {
     setTimeout(() => {
       const config = {
         headers:{
-          "X-RapidAPI-Key": "f8d010d7bamsh448713cb42b04d3p1d0a08jsn65d20e8ca833",
+          "X-RapidAPI-Key": "66978d38aamsh2ad17523d253acep1e954bjsnab8d64fc75f1",
           "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
         }
       }
@@ -121,9 +121,9 @@ const TopPlay = ({setSongDataSend}) => {
     xl:max-w-[400px] max-w-full flex-col'>
       <div className='w-full flex flex-col '>
         <div  className='flex flex-row justify-between items-center'>
-          <h2 className='text-white font-bold text-2xl'>Top Charts</h2>
+          <h2 className='text-white font-bold text-2xl'>Top 5 Charts</h2>
           <Link to="/top-charts">
-            <p className='text-gray-300 text-base cursor-pointer'>see more</p>
+            <p className='text-gray-300 text-base cursor-pointer'></p>
           </Link>
         </div>
         <div className='mt-4 flex flex-col gap-1'>
@@ -139,9 +139,9 @@ const TopPlay = ({setSongDataSend}) => {
         </div>
         <div className='w-full flex flex-col mt-3'>
           <div className='flex flex-row justify-between items-center '>
-            <h2 className='text-white font-bold text-2xl '>Top Artists</h2>
+            <h2 className='text-white font-bold text-2xl '>Top 5 Artists</h2>
             <Link to="/top-charts">
-              <p className='text-gray-300 text-base cursor-pointer'>see more</p>
+              <p className='text-gray-300 text-base cursor-pointer'></p>
             </Link>
           </div>
         </div>

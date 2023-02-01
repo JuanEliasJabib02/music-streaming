@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import axios from "axios"
+import Discography from '../components/Discography'
+import { DetailsHeader } from '../components'
+import DetailsArtistHeader from '../components/DetailsArtistHeader'
 
 
 const ArtistDetails = () => {
@@ -11,17 +14,14 @@ const ArtistDetails = () => {
   const { artist } = location.state
 
   const artistId = artist.id
-  
-  console.log(artistId)
 
   const [artistData, setArtistData] = useState()
 
   useEffect(() => {
     setTimeout(() => {
-
       const config = {
         headers:{
-          "X-RapidAPI-Key": "f8d010d7bamsh448713cb42b04d3p1d0a08jsn65d20e8ca833",
+          "X-RapidAPI-Key": "66978d38aamsh2ad17523d253acep1e954bjsnab8d64fc75f1",
           "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
         },
         
@@ -30,19 +30,31 @@ const ArtistDetails = () => {
       axios.get(URL, config)
         .then(res => setArtistData(res.data)) 
         .catch(err => console.log(err))
-    },1000)
-  })
+    },500)
+  }, [artistId])
+  
 
+  const discography = artistData?.discography.singles.items
 
-  const discography = artistData.discography.singles.items
-
-
+  console.log(discography)
 
 
   return (
-    <div>
-      <h1>AQUI TOY</h1>
-    </div>
+    <div className="flex flex-col">
+      < DetailsArtistHeader
+        artistData={artistData}
+      />
+
+      <div className=' flex flex-wrap gap-5 mt-5'>
+      {
+        discography?.map((song) => ( 
+          < Discography  song={song} key={song.id} />
+        ))
+        }
+      </div>
+
+
+  </div>
   )
 }
 
