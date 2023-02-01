@@ -68,7 +68,6 @@ const TopChartCard = ({ song, i}) => {
 
 const TopPlay = ({setSongDataSend}) => {
 
-  const dispatch = useDispatch();
   const divRef = useRef(null)
     
   const { data } = useGetTopChartsQuery();

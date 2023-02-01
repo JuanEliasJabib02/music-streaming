@@ -30,8 +30,7 @@ const App = () => {
             <TopPlay  />
           </div>
         </div>
-        <div className='h-20'>
-        class
+        <div className='h-20 bg-[#3D1766]'>
       </div>
       </div>
 

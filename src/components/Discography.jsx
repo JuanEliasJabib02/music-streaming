@@ -1,5 +1,4 @@
 import React from 'react'
-import SongBar from './SongBar'
 
 const Discography = ({ song }) => {
   
